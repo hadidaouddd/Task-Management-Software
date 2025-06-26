@@ -1,0 +1,67 @@
+@font-face {
+  font-family: "PlusJakartaSans Bold";
+  src: url("../../public/fonts/PlusJakartaSans-Bold.ttf") format("opentype");
+}
+@font-face {
+  font-family: "PlusJakartaSans Medium";
+  src: url("../../public/fonts/PlusJakartaSans-Medium.ttf") format("opentype");
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+/* Light theme (default) */
+:root {
+  --appbar-bg-color: #ffffff;
+  --appbar-text-color: black;
+  --background-color: red;
+  --text-color: #000000;
+  --appbar-title-text-size: 24px;
+  --line-bg-color: #e4ebfa;
+  --primary-color: #635fc7;
+  --hover-primary-color: #a8a4ff;
+  --secondary-color: #f4f7fd;
+  --grey-color: #828fa3;
+  --secondary-btn-bg-color: #635fc71a;
+  --hover-secondary-btn-color: #dcdaf2;
+  --dialog-text-color: #828fa3;
+  --delete-color-text: #ea5555;
+  --hover-delete-color: #ff9898;
+  --birder-color: #828fa3;
+  --add-column-color: #e9effa;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --appbar-bg-color: #2b2c37;
+  --appbar-text-color: #ffffff;
+  --background-color: #121212;
+  --text-color: #ffffff;
+  --line-bg-color: #3e3f4e;
+  --secondary-color: #20212c;
+  --secondary-btn-bg-color: white;
+  --dialog-text-color: white;
+  --birder-color: #eff1f3;
+  --add-column-color: #2b2c37;
+}
+
+@media screen and (min-width: 800px) {
+  /* width */
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    border-radius: 5px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: gray;
+    border-radius: 5px;
+  }
+}
