@@ -56,7 +56,17 @@ export default function Home() {
       }),
     })
   );
-
+  React.useEffect(() => {
+    const storedMode = localStorage.getItem("darkMode");
+    if (storedMode !== null) {
+      const mode = storedMode === "true";
+      setDarkMode(mode);
+      document.documentElement.setAttribute(
+        "data-theme",
+        mode ? "dark" : "light"
+      );
+    }
+  }, []);
   return (
     <Box sx={{ display: "flex" }}>
       <NavBar

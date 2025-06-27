@@ -37,7 +37,6 @@ const NavBar = ({
         backgroundColor: "var(--appbar-bg-color)",
         color: "var(--appbar-text-color)",
         boxShadow: "none",
-        borderBottom: "1px solid var(--line-bg-color)",
         height: isTablet ? "81px" : isMobile ? "64px" : "97px",
         display: "flex",
         alignItems: "center",
@@ -80,6 +79,8 @@ const NavBar = ({
           justifyContent: "space-between",
           alignItems: "center",
           width: isTablet ? "65%" : isMobile ? "85%" : "80.5%",
+          borderBottom: "1px solid var(--line-bg-color)",
+          height: isTablet ? "81px" : isMobile ? "64px" : "97px",
         }}
       >
         <Box

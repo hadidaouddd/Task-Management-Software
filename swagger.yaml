@@ -1,0 +1,263 @@
+openapi: 3.0.0
+info:
+  title: Task Management API
+  version: 1.0.0
+  description: API for managing boards, columns, tasks, and subtasks
+
+servers:
+  - url: http://localhost:8080/api
+
+tags:
+  - name: Boards
+    description: Manage boards (CRUD)
+  - name: Columns
+    description: Manage columns for boards
+  - name: Tasks
+    description: Manage tasks inside columns
+  - name: Subtasks
+    description: Update subtasks within tasks
+
+paths:
+  /boards:
+    get:
+      tags: [Boards]
+      summary: Get all boards
+      responses:
+        200:
+          description: List of boards
+    post:
+      tags: [Boards]
+      summary: Create a new board
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                columns:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      position:
+                        type: integer
+      responses:
+        201:
+          description: Board created
+
+  /boards/{id}:
+    put:
+      tags: [Boards]
+      summary: Update a board
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                columns:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+      responses:
+        200:
+          description: Board updated
+    delete:
+      tags: [Boards]
+      summary: Delete a board
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Board deleted
+
+  /columns/{boardId}:
+    get:
+      tags: [Columns]
+      summary: Get columns by board ID
+      parameters:
+        - in: path
+          name: boardId
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: List of columns
+
+  /columns:
+    post:
+      tags: [Columns]
+      summary: Add a new column
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                board_id:
+                  type: integer
+                color:
+                  type: string
+      responses:
+        201:
+          description: Column created
+
+  /columns/{id}:
+    delete:
+      tags: [Columns]
+      summary: Delete a column
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Column deleted
+
+  /tasks/{columnId}:
+    get:
+      tags: [Tasks]
+      summary: Get tasks by column ID
+      parameters:
+        - in: path
+          name: columnId
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: List of tasks
+
+  /tasks:
+    post:
+      tags: [Tasks]
+      summary: Create a task
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                status:
+                  type: string
+                column_id:
+                  type: integer
+                subtasks:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      isCompleted:
+                        type: boolean
+      responses:
+        201:
+          description: Task created
+
+  /tasks/{id}:
+    put:
+      tags: [Tasks]
+      summary: Update a task
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                column_id:
+                  type: integer
+                subtasks:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      title:
+                        type: string
+                      isCompleted:
+                        type: boolean
+      responses:
+        200:
+          description: Task updated
+    delete:
+      tags: [Tasks]
+      summary: Delete a task
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Task deleted
+
+  /subtasks/{id}:
+    put:
+      tags: [Subtasks]
+      summary: Update a subtask
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                isCompleted:
+                  type: boolean
+      responses:
+        200:
+          description: Subtask updated

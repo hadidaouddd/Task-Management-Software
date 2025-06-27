@@ -43,10 +43,12 @@ const SideBar = ({
   });
 
   const toggleTheme = () => {
-    setDarkMode(!darkMode);
+    const newMode = !darkMode;
+    setDarkMode(newMode);
+    localStorage.setItem("darkMode", newMode.toString());
     document.documentElement.setAttribute(
       "data-theme",
-      darkMode ? "light" : "dark"
+      newMode ? "dark" : "light"
     );
   };
   const handleSelectBoard = (board) => {
